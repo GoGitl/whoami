@@ -1,0 +1,11 @@
+FROM arm64v8/alpine:3 AS binary
+RUN apk add go
+ADD . /app
+WORKDIR /app
+RUN env GOARCH=arm64 GOARM=8 GOOS=linux go build -o http
+
+FROM arm64v8/alpine:3
+WORKDIR /app
+EXPOSE 8080
+COPY --from=binary /app/http /app
+CMD ["/app/http"]
