@@ -1,10 +1,22 @@
+FROM alpine AS qemu
+
+#QEMU Download
+ENV QEMU_URL https://github.com/balena-io/qemu/releases/download/v3.0.0%2Bresin/qemu-3.0.0+resin-arm.tar.gz
+RUN apk add curl && curl -L ${QEMU_URL} | tar zxvf - -C . --strip-components 1
+
 FROM arm32v7/alpine:3 AS binary
+# Add QEMU
+COPY --from=qemu qemu-arm-static /usr/bin
+
 RUN apk add go
 ADD . /app
 WORKDIR /app
 RUN env GOARCH=arm GOARM=7 GOOS=linux go build -o http
 
 FROM arm32v7/alpine:3
+# Add QEMU
+COPY --from=qemu qemu-arm-static /usr/bin
+
 WORKDIR /app
 EXPOSE 8080
 COPY --from=binary /app/http /app
