@@ -1,0 +1,21 @@
+image: gogitl/whoami:latest
+manifests:
+  - image: gogitl/whoami:latest
+    platform:
+      architecture: amd64
+      os: linux
+  - image: gogitl/whoami:ARM64v8
+    platform:
+      architecture: arm64
+      os: linux
+      variant: v8
+  - image: gogitl/whoami:ARM32v7
+    platform:
+      architecture: arm
+      os: linux
+      variant: v7
+  - image: gogitl/whoami:ARM32v6
+    platform:
+      architecture: arm
+      os: linux
+      variant: v6

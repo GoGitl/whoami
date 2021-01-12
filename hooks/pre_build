@@ -1,0 +1,3 @@
+#!/bin/bash
+# https://www.trion.de/news/2019/10/14/docker-multi-arch-dockerhub.html
+docker run --rm --privileged multiarch/qemu-user-static:register --reset
