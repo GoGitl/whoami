@@ -6,7 +6,7 @@ RUN apk add curl && curl -L ${QEMU_URL} | tar zxvf - -C . --strip-components 1
 
 FROM arm64v8/alpine:3 AS binary
 # Add QEMU
-COPY --from=qemu qemu-arm-static /usr/bin
+COPY --from=qemu qemu-aarch64-static /usr/bin
 
 RUN apk add go
 ADD . /app
@@ -15,7 +15,7 @@ RUN env GOARCH=arm64 GOOS=linux go build -o http
 
 FROM arm64v8/alpine:3
 # Add QEMU
-COPY --from=qemu qemu-arm-static /usr/bin
+COPY --from=qemu qemu-aarch64-static /usr/bin
 
 WORKDIR /app
 EXPOSE 8080
