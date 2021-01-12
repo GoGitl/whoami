@@ -10,4 +10,4 @@ Simple HTTP docker service that prints it's container ID
     $ curl $(hostname --all-ip-addresses | awk '{print $1}'):8080
     I'm 736ab83837bb
 
-You can find me on docker hub: [a link](https://hub.docker.com/repository/docker/gogitl/whoami)
+You can find me on docker hub: [gogitl/whoami on Docker](https://hub.docker.com/repository/docker/gogitl/whoami)
